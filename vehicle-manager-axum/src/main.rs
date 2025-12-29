@@ -1,4 +1,7 @@
-use axum::{debug_handler, routing::get, Json, Router};
+use axum::{ routing::get,  Router};
+mod vehicle;
+
+use vehicle::{vehicle_get, vehicle_post};
 
 #[tokio::main]
 async fn main() {
@@ -14,22 +17,3 @@ async fn main() {
     // run our app with hyper, listening globally on port 6579
     axum::serve(listener, router01).await.unwrap(); //axum crate. is set by the listener configuration
 }
-#[derive(serde::Serialize)]
-struct Vehicle {
-    manufacturer: String,
-    model: String,
-    year: u32,
-    id: String
-}
-#[debug_handler]
-async fn vehicle_get() -> Json<Vehicle>{
-    println!("vehicle get");
-    Json::from(Vehicle{
-        manufacturer: "Mazda".to_string(),
-        model: "CX-3".to_string(),
-        year: 2018,
-        id: uuid::Uuid::new_v4().to_string(),
-    })
-}
-
-async fn vehicle_post(){}
