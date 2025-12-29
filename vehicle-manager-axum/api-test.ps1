@@ -15,3 +15,9 @@ $Params = @{
   ContentType = 'application/json'
 }
 Invoke-RestMethod @Params
+
+$Params = @{
+    Uri = 'http://localhost:6579/vehicle?manufacturer=Chevrolet&model=Silverado&year=2024&first_name=Leandro&last_name=YourDad'
+    Method = 'Post'
+}
+Invoke-RestMethod @Params
